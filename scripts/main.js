@@ -294,54 +294,45 @@ class DevvyDevSite {
    * Handle form submission
    */
   async handleFormSubmit(e) {
-    e.preventDefault();
-    
     const form = e.target;
-    const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
     
     // Validate all fields
     if (!this.validateForm(form)) {
+      e.preventDefault();
       return;
     }
 
+    // For Netlify forms, let the default submission happen
+    if (form.hasAttribute('data-netlify')) {
+      // Show loading state briefly
+      this.setSubmitButtonState(submitButton, 'loading');
+      
+      // Let Netlify handle the submission (don't prevent default)
+      // The form will submit normally to Netlify
+      return;
+    }
+
+    // Only prevent default for non-Netlify forms (local development)
+    e.preventDefault();
+    
     // Show loading state
     this.setSubmitButtonState(submitButton, 'loading');
 
     try {
-      // Check if we're on Netlify (has data-netlify attribute)
-      if (form.hasAttribute('data-netlify')) {
-        // Submit to Netlify Forms
-        const response = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
-        });
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        
-        // Show success message
-        this.showFormMessage('success', 'Thank you! Your message has been sent successfully.');
-        form.reset();
-        
-      } else {
-        // Fallback to simulation for local development
-        await this.simulateFormSubmission(formData);
-        this.showFormMessage('success', 'Thank you! Your message has been sent successfully.');
-        form.reset();
-      }
+      // Fallback to simulation for local development
+      await this.simulateFormSubmission(new FormData(form));
+      this.showFormMessage('success', 'Thank you! Your message has been sent successfully.');
+      form.reset();
       
     } catch (error) {
-      // Show error message
       this.showFormMessage('error', 'Sorry, there was an error sending your message. Please try again.');
       console.error('Form submission error:', error);
       
     } finally {
-      // Reset button state
       this.setSubmitButtonState(submitButton, 'default');
     }
+  }
   }
 
   /**
