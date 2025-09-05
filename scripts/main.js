@@ -379,6 +379,12 @@ class DevvyDevSite {
       isValid = false;
       errorMessage = 'Please enter a valid email address.';
     }
+    
+    // Validate phone number
+    else if (type === 'tel' && value && !this.isValidPhone(value)) {
+      isValid = false;
+      errorMessage = 'Please enter a valid phone number.';
+    }
     // Validate minimum length
     else if (input.hasAttribute('minlength')) {
       const minLength = parseInt(input.getAttribute('minlength'));
@@ -398,6 +404,16 @@ class DevvyDevSite {
   isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  /**
+   * Check if phone number is valid
+   */
+  isValidPhone(phone) {
+    // Remove all non-digit characters
+    const cleaned = phone.replace(/\D/g, '');
+    // Check if it's a valid length (10-15 digits)
+    return cleaned.length >= 10 && cleaned.length <= 15;
   }
 
   /**
