@@ -6,12 +6,8 @@
  * Implements smooth animations, mobile navigation, and form handling
  */
 
-// Debug: Script is loading
-console.log('🚀 main.js script is loading...');
-
 class DevvyDevSite {
   constructor() {
-    console.log('🏗️ DevvyDevSite constructor called');
     this.init();
   }
 
@@ -19,7 +15,6 @@ class DevvyDevSite {
    * Initialize all site functionality
    */
   init() {
-    console.log('⚡ DevvyDevSite init() called');
     this.setupEventListeners();
     this.setupNavigation();
     this.setupScrollAnimations();
@@ -280,28 +275,22 @@ class DevvyDevSite {
   /**
    * Set up contact form handling
    */
-  setupContactForm() {
-    console.log('Setting up contact form...');
+    setupContactForm() {
     const form = document.getElementById('contact-form');
-    console.log('Form found:', !!form);
     
     if (!form) {
-      console.log('No contact form found - exiting setupContactForm');
       return;
     }
 
-    console.log('Adding submit event listener to form');
+    // Add submit event listener
     form.addEventListener('submit', this.handleFormSubmit.bind(this));
-    
-    // Add real-time validation
+
+    // Add real-time validation to form inputs
     const inputs = form.querySelectorAll('input, textarea');
-    console.log('Found', inputs.length, 'input/textarea elements');
     inputs.forEach(input => {
       input.addEventListener('blur', () => this.validateField(input));
       input.addEventListener('input', () => this.clearFieldError(input));
     });
-    
-    console.log('Contact form setup complete');
   }
 
   /**
@@ -311,26 +300,10 @@ class DevvyDevSite {
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     
-    console.log('Form submission started');
-    console.log('Form has data-netlify:', form.hasAttribute('data-netlify'));
-    console.log('Form data-netlify value:', form.getAttribute('data-netlify'));
-    console.log('Form has netlify attr:', form.hasAttribute('netlify'));
-    console.log('Form netlify value:', form.getAttribute('netlify'));
-    console.log('Form name:', form.getAttribute('name'));
-    console.log('Form method:', form.getAttribute('method'));
-    console.log('Form action:', form.getAttribute('action'));
-    console.log('All form attributes:');
-    for (let i = 0; i < form.attributes.length; i++) {
-      const attr = form.attributes[i];
-      console.log(`  ${attr.name}: ${attr.value}`);
-    }
-    
     // Validate all fields
     const isValid = this.validateForm(form);
-    console.log('Form validation result:', isValid);
     
     if (!isValid) {
-      console.log('Form validation failed - preventing submission');
       e.preventDefault();
       return;
     }
@@ -338,11 +311,8 @@ class DevvyDevSite {
     // For Netlify forms, let the default submission happen
     // Netlify removes data-netlify attributes during processing, so we detect by hostname
     const isNetlifyProduction = window.location.hostname === 'thedevvydev.com' || window.location.hostname.includes('netlify.app');
-    console.log('Hostname:', window.location.hostname);
-    console.log('Is Netlify production:', isNetlifyProduction);
     
     if (isNetlifyProduction || form.hasAttribute('data-netlify')) {
-      console.log('Netlify form detected - allowing natural submission');
       // Show loading state briefly
       this.setSubmitButtonState(submitButton, 'loading');
       
@@ -773,9 +743,7 @@ class DevvyDevSite {
 }
 
 // Initialize the site when the script loads
-console.log('🎯 About to create DevvyDevSite instance...');
 const devvyDevSite = new DevvyDevSite();
-console.log('✅ DevvyDevSite instance created successfully');
 
 // Add some CSS for form validation and animations
 const additionalStyles = `

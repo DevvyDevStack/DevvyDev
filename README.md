@@ -217,7 +217,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Website**: [thedevvydev.com](https://thedevvydev.com)
 - **Email**: devvydevstack@gmail.com
-- **LinkedIn**: [linkedin.com/in/devvydev](https://linkedin.com/in/devvydev)
+- **LinkedIn**: [linkedin.com/in/devvydev](https://www.linkedin.com/in/stephkarlsen/)
 - **GitHub**: [@DevvyDevStack](https://github.com/DevvyDevStack)
 
 ---
