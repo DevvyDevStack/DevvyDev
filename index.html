@@ -474,7 +474,7 @@
                         </div>
                     </div>
                     
-                    <form class="contact__form" id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <form class="contact__form" id="contact-form" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
                         <!-- Honeypot field for spam protection -->
                         <input type="hidden" name="bot-field" />
                         <!-- Form source identifier for notifications -->
@@ -559,5 +559,13 @@
 
     <!-- Scripts -->
     <script src="scripts/main.js"></script>
+    
+    <!-- Hidden form for Netlify to detect form structure -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="tel" name="phone" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+    </form>
 </body>
 </html>
