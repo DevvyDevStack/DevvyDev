@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to authenticated users
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Public read access for certain collections (adjust as needed)
+    match /public/{document=**} {
+      allow read: if true;
+    }
+    
+    // Contact form submissions (for portfolio site)
+    match /contacts/{contactId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+    
+    // Winchester Jaunts bookings
+    match /bookings/{bookingId} {
+      allow create: if true;
+      allow read, update: if request.auth != null || 
+        resource.data.email == request.auth.token.email;
+    }
+    
+    // Esthetician appointments
+    match /appointments/{appointmentId} {
+      allow create: if true;
+      allow read, update: if request.auth != null ||
+        resource.data.clientEmail == request.auth.token.email;
+    }
+  }
+}
