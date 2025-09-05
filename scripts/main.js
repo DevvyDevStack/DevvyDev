@@ -333,7 +333,6 @@ class DevvyDevSite {
       this.setSubmitButtonState(submitButton, 'default');
     }
   }
-  }
 
   /**
    * Validate entire form
