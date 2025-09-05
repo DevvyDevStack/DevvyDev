@@ -6,8 +6,12 @@
  * Implements smooth animations, mobile navigation, and form handling
  */
 
+// Debug: Script is loading
+console.log('🚀 main.js script is loading...');
+
 class DevvyDevSite {
   constructor() {
+    console.log('🏗️ DevvyDevSite constructor called');
     this.init();
   }
 
@@ -15,6 +19,7 @@ class DevvyDevSite {
    * Initialize all site functionality
    */
   init() {
+    console.log('⚡ DevvyDevSite init() called');
     this.setupEventListeners();
     this.setupNavigation();
     this.setupScrollAnimations();
@@ -752,7 +757,9 @@ class DevvyDevSite {
 }
 
 // Initialize the site when the script loads
+console.log('🎯 About to create DevvyDevSite instance...');
 const devvyDevSite = new DevvyDevSite();
+console.log('✅ DevvyDevSite instance created successfully');
 
 // Add some CSS for form validation and animations
 const additionalStyles = `
