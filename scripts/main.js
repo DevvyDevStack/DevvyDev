@@ -276,18 +276,27 @@ class DevvyDevSite {
    * Set up contact form handling
    */
   setupContactForm() {
+    console.log('Setting up contact form...');
     const form = document.getElementById('contact-form');
+    console.log('Form found:', !!form);
     
-    if (!form) return;
+    if (!form) {
+      console.log('No contact form found - exiting setupContactForm');
+      return;
+    }
 
+    console.log('Adding submit event listener to form');
     form.addEventListener('submit', this.handleFormSubmit.bind(this));
     
     // Add real-time validation
     const inputs = form.querySelectorAll('input, textarea');
+    console.log('Found', inputs.length, 'input/textarea elements');
     inputs.forEach(input => {
       input.addEventListener('blur', () => this.validateField(input));
       input.addEventListener('input', () => this.clearFieldError(input));
     });
+    
+    console.log('Contact form setup complete');
   }
 
   /**
