@@ -336,7 +336,12 @@ class DevvyDevSite {
     }
 
     // For Netlify forms, let the default submission happen
-    if (form.hasAttribute('data-netlify')) {
+    // Netlify removes data-netlify attributes during processing, so we detect by hostname
+    const isNetlifyProduction = window.location.hostname === 'thedevvydev.com' || window.location.hostname.includes('netlify.app');
+    console.log('Hostname:', window.location.hostname);
+    console.log('Is Netlify production:', isNetlifyProduction);
+    
+    if (isNetlifyProduction || form.hasAttribute('data-netlify')) {
       console.log('Netlify form detected - allowing natural submission');
       // Show loading state briefly
       this.setSubmitButtonState(submitButton, 'loading');
