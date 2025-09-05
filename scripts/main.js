@@ -313,6 +313,10 @@ class DevvyDevSite {
     
     console.log('Form submission started');
     console.log('Form has data-netlify:', form.hasAttribute('data-netlify'));
+    console.log('Form data-netlify value:', form.getAttribute('data-netlify'));
+    console.log('Form attributes:', form.attributes);
+    console.log('Form name:', form.getAttribute('name'));
+    console.log('Form method:', form.getAttribute('method'));
     
     // Validate all fields
     const isValid = this.validateForm(form);
