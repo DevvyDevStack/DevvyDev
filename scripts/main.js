@@ -314,9 +314,16 @@ class DevvyDevSite {
     console.log('Form submission started');
     console.log('Form has data-netlify:', form.hasAttribute('data-netlify'));
     console.log('Form data-netlify value:', form.getAttribute('data-netlify'));
-    console.log('Form attributes:', form.attributes);
+    console.log('Form has netlify attr:', form.hasAttribute('netlify'));
+    console.log('Form netlify value:', form.getAttribute('netlify'));
     console.log('Form name:', form.getAttribute('name'));
     console.log('Form method:', form.getAttribute('method'));
+    console.log('Form action:', form.getAttribute('action'));
+    console.log('All form attributes:');
+    for (let i = 0; i < form.attributes.length; i++) {
+      const attr = form.attributes[i];
+      console.log(`  ${attr.name}: ${attr.value}`);
+    }
     
     // Validate all fields
     const isValid = this.validateForm(form);
