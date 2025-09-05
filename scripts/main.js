@@ -297,14 +297,22 @@ class DevvyDevSite {
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     
+    console.log('Form submission started');
+    console.log('Form has data-netlify:', form.hasAttribute('data-netlify'));
+    
     // Validate all fields
-    if (!this.validateForm(form)) {
+    const isValid = this.validateForm(form);
+    console.log('Form validation result:', isValid);
+    
+    if (!isValid) {
+      console.log('Form validation failed - preventing submission');
       e.preventDefault();
       return;
     }
 
     // For Netlify forms, let the default submission happen
     if (form.hasAttribute('data-netlify')) {
+      console.log('Netlify form detected - allowing natural submission');
       // Show loading state briefly
       this.setSubmitButtonState(submitButton, 'loading');
       
@@ -313,6 +321,7 @@ class DevvyDevSite {
       return;
     }
 
+    console.log('Non-Netlify form - using simulation');
     // Only prevent default for non-Netlify forms (local development)
     e.preventDefault();
     
